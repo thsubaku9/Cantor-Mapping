@@ -64,20 +64,18 @@ public class Implement {
                 current_loc++;
             }
 
-            if(r_loc !=resR.length)
-            {
-                while (r_loc<resR.length)
-                {   res[current_loc] = resR[r_loc];
-                    current_loc++;r_loc++;
-                }
+
+            while (r_loc<resR.length)
+            {   res[current_loc] = resR[r_loc];
+                current_loc++;r_loc++;
             }
-            if(l_loc!=resL.length)
-            {
-                while (l_loc<resL.length)
-                {   res[current_loc] = resL[l_loc];
-                    current_loc++;l_loc++;
-                }
+
+
+            while (l_loc<resL.length)
+            {   res[current_loc] = resL[l_loc];
+                current_loc++;l_loc++;
             }
+
 
             return res;
         }
