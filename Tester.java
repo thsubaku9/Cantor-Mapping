@@ -1,25 +1,13 @@
 package CantorMapping;
 
-import java.util.ArrayList;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-class Tester {
-    private void generate_lexi_internal(int size,int min_size,int max_size,ArrayList<String> all_strings,String current_gen){
+public class Tester {
+    @Test
 
-        if(all_strings.size() > size) return;
-        if (current_gen.length() > max_size) return;
-        if (current_gen.length() >= min_size){
-            all_strings.add(current_gen);
-        }
-        for(int i=(int)'a' ;i<=(int)'z';i++){
-            generate_lexi_internal(size,min_size,max_size,all_strings,current_gen+ (char)i );
-        }
-
+    public void addTest(){
+        String str = "Junit is working fine";
+        assertEquals("Junit is working fine",str);
     }
-
-    public String[] generate_lexi(int size, int min_size, int max_size){
-        ArrayList<String> all_strings = new ArrayList<>();
-        generate_lexi_internal(size,min_size,max_size,all_strings,"");
-
-        return (String[])all_strings.toArray();
-    }
-} 
+}

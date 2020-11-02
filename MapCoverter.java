@@ -1,8 +1,21 @@
 package CantorMapping;
 
+import java.util.ArrayList;
+
 class MapCoverter {
-    static float x = 30;
-    static float toMult = 100;
+    final float x = 30;
+    final float mulFactor = 10;
+
+
+    public ArrayList<Object> convertArray(ArrayList<Object> array){
+        ArrayList<Object> retArr = new ArrayList<Object>(array.size());
+
+        for(Object obj : array){
+            retArr.add(CantorHashing(obj.toString()));
+        }
+
+        return retArr;
+    }
 
     private void declare(){
 
@@ -20,13 +33,13 @@ class MapCoverter {
 
     public double CantorHashing(String s) {
 
-        int toSub = (int)'a' - 1;
+        int baseValue = (int)'a' - 1;
         double result = 0.0d;
         double temp;
         double toInternalMult = 1;
-        for(char z: s.toCharArray())
+        for(char character: s.toCharArray())
         {
-            temp = ((int)z - toSub)*toInternalMult;
+            temp = ((int)character - baseValue)*toInternalMult;
             toInternalMult/= x;
             result+=temp;
         }
