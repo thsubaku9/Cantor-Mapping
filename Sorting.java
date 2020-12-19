@@ -2,7 +2,7 @@ package CantorMapping;
 
 class Sorting {
 
-    public static int[] init_index(int[] values){
+    public static int[] init_index(Number[] values){
         int[] res = new int[values.length];
         for (int a = 0; a<values.length; a++){
             res[a] = a;
@@ -10,10 +10,9 @@ class Sorting {
         return  res;
     }
             
-    static public int[] mergeSort(int[] arr, int[] values)
+    static public <T extends Number> int[] mergeSort(int[] arr, T[] values, ComparatorInterface<T> compare)
     {        
-        if(arr.length >1)
-        {            
+        if(arr.length >1){            
             int midPt = (int)(arr.length/2);
             int[] left = new int[midPt];
             int[] right = new int[arr.length - midPt];
@@ -26,15 +25,15 @@ class Sorting {
                 right[a] = arr[midPt +a];
             }
 
-            int[] resL =mergeSort(left,values);
-            int[] resR = mergeSort(right,values);
+            int[] resL =mergeSort(left,values,compare);
+            int[] resR = mergeSort(right,values,compare);
 
             int[] res = new int[resL.length + resR.length];
             
             int l_loc=0,r_loc=0,current_loc=0;
 
             while((r_loc<resR.length) && (l_loc<resL.length)) {
-                if(values[resL[l_loc]]<=values[resR[r_loc]]) {
+                if(compare.compare(values[resL[l_loc]], values[resR[r_loc]]) < 0 ){
                     res[current_loc] = resL[l_loc];
                     l_loc++;
                 } else {
@@ -56,10 +55,7 @@ class Sorting {
             }
 
             return res;
-        }
-
-        else
-        {
+        } else {
             return arr;
         }
     }
@@ -67,10 +63,10 @@ class Sorting {
     
     public static void main(String args[]){
 
-        int[] values = {10,-9,8,2,-11,23,14};
+        Integer[] values ={10,-9,8,2,-11,23,14};
 
-        int[] indexedArray = init_index(values);
-        int[] orderedArray = mergeSort(indexedArray,values);
+        int[] indexedArray = init_index(values);        
+        int[] orderedArray = mergeSort(indexedArray,values,(a,b) -> {return (a.floatValue() - b.floatValue())> 0 ? 1 : -1;});
 
         for(int i=0;i<orderedArray.length;i++)
         {
