@@ -27,16 +27,16 @@ class MapConverter {
         this.baseValue = baseValue;
     }        
 
-    public List<Object> convertIterabletoCantorMap(ArrayList<Object> array){
-        List<Object> returnArray = new ArrayList<Object>(array.size());
+    public List<Double> convertIterabletoCantorMap(ArrayList<Object> array){
+        List<Double> returnArray = new ArrayList<>(array.size());
         for(Object obj : array){
             returnArray.add(CantorMap(obj.toString()));
         }
         return returnArray;
     }
 
-    public List<Object> convertIterabletoCantorMap(Object[] array){
-        List<Object> returnArray = new ArrayList<Object>(array.length);
+    public List<Double> convertIterabletoCantorMap(Object[] array){
+        List<Double> returnArray = new ArrayList<>(array.length);
         for(Object obj : array){
             returnArray.add(CantorMap(obj.toString()));
         }

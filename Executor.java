@@ -1,6 +1,7 @@
 package CantorMapping;
 
 import java.util.List;
+import java.util.Arrays;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -11,14 +12,16 @@ public class Executor {
         MapConverter mapConverter = new MapConverter();
         Sorting sorter = new Sorting();        
 
-        // Part one
+        // Part one - Standard Sorting
         String[] sortLater = {"bac","abc","bach","azzzzzzzzzz","azzzzzzzzzb","z","classic","basketcase","basket"};
 
-        List<Object> res= mapConverter.convertIterabletoCantorMap(sortLater);
+        List<Double> cMapped= mapConverter.convertIterabletoCantorMap(sortLater);        
 
-        for (Object obj: res){
-            System.out.println(obj);
-        }
+        int[] indexedArray = sorter.init_index(cMapped.size());
+        Double[] values = Arrays.asList(cMapped.toArray()).toArray(new Double[0]);        
+        int[] orderedindex = sorter.mergeSort(indexedArray, values, (a, b) -> {return (a.doubleValue() - b.doubleValue())> 0 ? 1 : -1;});
+        
+        sorter.printIndexToValues(orderedindex, sortLater);
         /*
         Result res = JUnitCore.runClasses(Tester.class);
 
@@ -30,20 +33,3 @@ public class Executor {
         */
     }
 }
-
-
-/**
-      private void trial(){
-
-        String[] sortLater = {"bac","abc","bach","azzzzzzzzzz","azzzzzzzzzb","z","classic","basketcase","basket"};
-        double[] cantor_hashed = new double[sortLater.length];
-
-        for(int i=0;i<sortLater.length;i++){
-            cantor_hashed[i] = CantorHashing(sortLater[i]);
-
-            System.out.println("String: "+sortLater[i]+" = "+cantor_hashed[i]);
-        }
-
-
-    }
- */

@@ -1,16 +1,24 @@
 package CantorMapping;
 
+
 class Sorting {
 
-    public static int[] init_index(Number[] values){
-        int[] res = new int[values.length];
-        for (int a = 0; a<values.length; a++){
+    public int[] init_index(int size){
+        int[] res = new int[size];
+        for (int a = 0; a<size; a++){
             res[a] = a;
         }
         return  res;
+    }    
+    
+    public <T> void printIndexToValues(int[] index, T[] values){
+
+        for (Integer i: index){
+            System.out.println(values[i.intValue()]);
+        }   
     }
-            
-    static public <T extends Number> int[] mergeSort(int[] arr, T[] values, ComparatorInterface<T> compare)
+
+    public <T extends Number> int[] mergeSort(int[] arr, T[] values, ComparatorInterface<T> compare)
     {        
         if(arr.length >1){            
             int midPt = (int)(arr.length/2);
@@ -58,20 +66,5 @@ class Sorting {
         } else {
             return arr;
         }
-    }
-
-    
-    public static void main(String args[]){
-
-        Integer[] values ={10,-9,8,2,-11,23,14};
-
-        int[] indexedArray = init_index(values);        
-        int[] orderedArray = mergeSort(indexedArray,values,(a,b) -> {return (a.floatValue() - b.floatValue())> 0 ? 1 : -1;});
-
-        for(int i=0;i<orderedArray.length;i++)
-        {
-            System.out.print(values[orderedArray[i]]+"\t");
-        }
-    }
-    
+    }        
 }
