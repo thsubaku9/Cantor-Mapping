@@ -1,6 +1,5 @@
 package CantorMapping;
 
-
 class Sorting {
 
     public int[] init_index(int size){
@@ -18,19 +17,19 @@ class Sorting {
         }   
     }
 
-    public <T> int[] mergeSort(int[] arr, T[] values, ComparatorInterface<T> compare)
+    public <T> int[] mergeSort(int[] index_arr, T[] values, ComparatorInterface<T> compare)
     {        
-        if(arr.length >1){            
-            int midPt = (int)(arr.length/2);
+        if(index_arr.length >1){            
+            int midPt = (int)(index_arr.length/2);
             int[] left = new int[midPt];
-            int[] right = new int[arr.length - midPt];
+            int[] right = new int[index_arr.length - midPt];
 
             for (int a = 0; a<midPt; a++){
-                left[a] = arr[a];
+                left[a] = index_arr[a];
             }
 
-            for (int a = 0; a<arr.length - midPt; a++){
-                right[a] = arr[midPt +a];
+            for (int a = 0; a<index_arr.length - midPt; a++){
+                right[a] = index_arr[midPt +a];
             }
 
             int[] resL =mergeSort(left,values,compare);
@@ -64,7 +63,7 @@ class Sorting {
 
             return res;
         } else {
-            return arr;
+            return index_arr;
         }
     }        
 }

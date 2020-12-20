@@ -13,19 +13,20 @@ public class Executor {
         Sorting sorter = new Sorting();        
 
         // Part one - Standard Sorting
-        String[] sortLater = {"bac","abc","bach","azzzzzzzzzz","azzzzzzzzzb","z","classic","basketcase","basket"};
+        String[] sortLater = {"zimmer","kernel","lambasted","bac","abc","bach","azzzzzzzzzz","azzzzzzzzzb","z","classic","basketcase","basket"};
 
-
-        long startTime = Instant.now().toEpochMilli();
+        
         List<Double> cMapped= mapConverter.convertIterabletoCantorMap(sortLater);        
 
         int[] indexedArray = sorter.init_index(cMapped.size());
-        Double[] values = Arrays.asList(cMapped.toArray()).toArray(new Double[0]);        
-        int[] orderedindex = sorter.mergeSort(indexedArray, values, (a, b) -> {return (a.doubleValue() - b.doubleValue())> 0 ? 1 : -1;});
+        Double[] values = Arrays.asList(cMapped.toArray()).toArray(new Double[0]);
+        
+        long startTime = Instant.now().toEpochMilli();
+        int[] orderedindex = sorter.mergeSort(indexedArray, values, (a, b) -> {return (Double.compare(a,b))> 0 ? 1 : -1;});
         long stopTime = Instant.now().toEpochMilli();
 
-        sorter.printIndexToValues(orderedindex, sortLater);
-
+        //sorter.printIndexToValues(orderedindex, sortLater);
+        
         ComparatorInterface<String> stringCmp = (a,b) -> {            
             for ( int i=0; i < a.length() && i < b.length(); i++){
                 if(a.charAt(i) != b.charAt(i)){
@@ -34,8 +35,18 @@ public class Executor {
             }
             return a.length() - b.length();
         };
-        
+                        
+        int[] indexedArray2 = sorter.init_index(sortLater.length);
+
+        long startTime2 = Instant.now().toEpochMilli();
+        int[] orderedindex2 = sorter.mergeSort(indexedArray2, sortLater, stringCmp);
+        long stopTime2 = Instant.now().toEpochMilli();        
+
+        //sorter.printIndexToValues(orderedindex2, sortLater);
+
         System.out.println(stopTime - startTime);
+        System.out.println(stopTime2 - startTime2);
+ 
         /*
         Result res = JUnitCore.runClasses(Tester.class);
 
