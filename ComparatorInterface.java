@@ -1,5 +1,8 @@
 package CantorMapping;
 
-public interface ComparatorInterface<T extends Number>{
+/**
+ * This interface exists only for enabling comparator fn passing as argument into sorting fn
+ */
+public interface ComparatorInterface<T>{
     int compare(T a, T b);
     }

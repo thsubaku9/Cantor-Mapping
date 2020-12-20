@@ -18,7 +18,7 @@ class Sorting {
         }   
     }
 
-    public <T extends Number> int[] mergeSort(int[] arr, T[] values, ComparatorInterface<T> compare)
+    public <T> int[] mergeSort(int[] arr, T[] values, ComparatorInterface<T> compare)
     {        
         if(arr.length >1){            
             int midPt = (int)(arr.length/2);
@@ -41,7 +41,7 @@ class Sorting {
             int l_loc=0,r_loc=0,current_loc=0;
 
             while((r_loc<resR.length) && (l_loc<resL.length)) {
-                if(compare.compare(values[resL[l_loc]], values[resR[r_loc]]) < 0 ){
+                if(compare.compare(values[resL[l_loc]], values[resR[r_loc]]) <= 0 ){
                     res[current_loc] = resL[l_loc];
                     l_loc++;
                 } else {
