@@ -12,9 +12,9 @@ import java.util.List;
 
 class MapConverter {
 
-    final float x;
-    final float scale;
-    final int baseValue;
+    public final float x;
+    public final float scale;
+    public final int baseValue;
 
     MapConverter(){
         x = 30.0f;
@@ -51,6 +51,6 @@ class MapConverter {
             iterativePolynomial/= x;
             result+=temp;
         }
-        return result;
+        return result * scale;
     }
 }

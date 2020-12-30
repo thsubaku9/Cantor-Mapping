@@ -1,6 +1,7 @@
 package CantorMapping;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.Instant;
 import org.junit.runner.JUnitCore;
@@ -40,9 +41,7 @@ public class Executor {
 
         long startTime2 = Instant.now().toEpochMilli();
         int[] orderedindex2 = sorter.mergeSort(indexedArray2, sortLater, stringCmp);
-        long stopTime2 = Instant.now().toEpochMilli();        
-
-        //sorter.printIndexToValues(orderedindex2, sortLater);
+        long stopTime2 = Instant.now().toEpochMilli();                
 
         System.out.println(stopTime - startTime);
         System.out.println(stopTime2 - startTime2);
@@ -56,5 +55,21 @@ public class Executor {
 
         System.out.println(res.wasSuccessful());
         */
+
+        //Part two - Suffix Sorting
+        String mainString = "mercibeaucoup";
+        
+        Double primary = mapConverter.CantorMap(mainString);
+
+        ArrayList<Double> suffixValues = new ArrayList<>();
+        suffixValues.add(primary);
+
+        for (int j=0; j<mainString.length(); j++) {
+            primary = (primary - mapConverter.scale*(double)((int)mainString.charAt(j) - mapConverter.baseValue))/mapConverter.baseValue;
+            suffixValues.add(primary);
+        }
+
+        
+        //Part three - Radix Sorting
     }
 }
