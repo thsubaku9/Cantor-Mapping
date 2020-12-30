@@ -14,6 +14,7 @@ public class Executor {
         Sorting sorter = new Sorting();        
 
         // Part one - Standard Sorting
+        System.out.println("STADARD SORTING");
         String[] sortLater = {"zimmer","kernel","lambasted","bac","abc","bach","azzzzzzzzzz","azzzzzzzzzb","z","classic","basketcase","basket"};
 
         
@@ -57,19 +58,31 @@ public class Executor {
         */
 
         //Part two - Suffix Sorting
+        System.out.println("SUFFIX SORTING");
         String mainString = "mercibeaucoup";
         
         Double primary = mapConverter.CantorMap(mainString);
 
         ArrayList<Double> suffixValues = new ArrayList<>();
         suffixValues.add(primary);
+        System.out.println(primary);
 
-        for (int j=0; j<mainString.length(); j++) {
-            primary = (primary - mapConverter.scale*(double)((int)mainString.charAt(j) - mapConverter.baseValue))/mapConverter.baseValue;
+        for (int j=0; j<mainString.length()-1; j++) {
+            System.out.println(mainString.charAt(j));
+            primary = primary - ((double)((int)mainString.charAt(j) - mapConverter.baseValue));
+            primary *= mapConverter.x;
+            System.out.println(primary);
             suffixValues.add(primary);
         }
 
-        
+        int[] suffix_index_array = sorter.init_index(mainString.length());
+        values = Arrays.asList(suffixValues.toArray()).toArray(new Double[0]);
+
+        int[] ordered_suffix_index = sorter.mergeSort(suffix_index_array, values, (a,b) -> {return (Double.compare(a,b))> 0 ? 1 : -1;});
+
+        for (int j=0; j<mainString.length(); j++) {
+            System.out.println(ordered_suffix_index[j] + " " + mainString.charAt(ordered_suffix_index[j]));
+        }
         //Part three - Radix Sorting
     }
 }
