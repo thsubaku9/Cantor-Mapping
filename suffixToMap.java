@@ -9,10 +9,25 @@ public class suffixToMap {
         this.mainString = mainString;
         internalConv = new MapConverter();
         cantorValue = new Double[this.mainString.length()];
+
+        processValue();
     }
 
-    public Double[] returnRepresentation(){
+    private void processValue(){
+        Double primary = internalConv.CantorMap(mainString);
+        
+        cantorValue[0] = primary;
 
+        for (int j=0; j<mainString.length()-1; j++) {            
+            primary = primary - ((int)mainString.charAt(j) - internalConv.baseValue);
+            primary *= internalConv.x;
+            cantorValue[j+1] = primary;
+        }
+    }
+    public Double[] getCantorValue(){
         return cantorValue;
+    }
+    public String getMainString(){
+        return mainString;
     }
 }
