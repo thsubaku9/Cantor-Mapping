@@ -15,7 +15,6 @@ public class Executor {
         // Part one - Standard Sorting
         System.out.println("STADARD SORTING");
         String[] sortLater = {"zimmer","kernel","lambasted","bac","abc","bach","azzzzzzzzzz","azzzzzzzzzb","z","classic","basketcase","basket"};
-
         
         List<Double> cMapped= mapConverter.convertIterabletoCantorMap(sortLater);        
 
@@ -23,7 +22,7 @@ public class Executor {
         Double[] values = Arrays.asList(cMapped.toArray()).toArray(new Double[0]);
         
         long startTime = Instant.now().toEpochMilli();
-        int[] orderedindex = sorter.mergeSort(indexedArray, values, (a, b) -> {return (Double.compare(a,b))> 0 ? 1 : -1;});
+        int[] orderedindex = sorter.mergeSort(indexedArray, values, (a, b) -> {return (int)Double.compare(a,b);});
         long stopTime = Instant.now().toEpochMilli();
 
         //sorter.printIndexToValues(orderedindex, sortLater);
@@ -41,7 +40,7 @@ public class Executor {
 
         long startTime2 = Instant.now().toEpochMilli();
         int[] orderedindex2 = sorter.mergeSort(indexedArray2, sortLater, stringCmp);
-        long stopTime2 = Instant.now().toEpochMilli();                
+        long stopTime2 = Instant.now().toEpochMilli();
 
         System.out.println(stopTime - startTime);
         System.out.println(stopTime2 - startTime2);
@@ -64,11 +63,34 @@ public class Executor {
 
         int[] suffix_index_array = sorter.init_index(mainString.length());        
 
-        int[] ordered_suffix_index = sorter.mergeSort(suffix_index_array, sconv.getCantorValue(), (a,b) -> {return (Double.compare(a,b))> 0 ? 1 : -1;});
+        int[] ordered_suffix_index = sorter.mergeSort(suffix_index_array, sconv.getCantorValue(), (a,b) -> {return (int)Double.compare(a,b);});
 
         for (int j=0; j<mainString.length(); j++) {
             System.out.println(ordered_suffix_index[j] + " " + mainString.charAt(ordered_suffix_index[j]));
         }
         //Part three - Radix Sorting
-    }
+        System.out.println("RADIX SORTING");
+
+        radixToMap rconv = new radixToMap(4);
+
+        Double[][] resultChunks = rconv.createRadixArray(sortLater);
+        /*
+        for (int j=0; j<resultChunks.length; j++){
+            for (int j1=0; j1<resultChunks[j].length; j1++)System.out.println(resultChunks[j][j1]);
+            System.out.println();
+        }
+        */
+        ComparatorInterface<Double[]> rcomp = (a,b) -> {
+            for(int pos = 0; pos<a.length && pos<b.length; pos++){
+                if(Double.compare(a[pos], b[pos])==0) continue;
+                else return (int)Double.compare(a[pos], b[pos]);
+            }
+            return a.length - b.length;
+        };
+        
+        int[] radix_indexed_array = sorter.init_index(sortLater.length);
+        int[] orderedindex3 = sorter.mergeSort(radix_indexed_array, resultChunks, rcomp);
+
+        sorter.printIndexToValues(orderedindex3, sortLater);
+    }    
 }

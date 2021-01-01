@@ -19,6 +19,11 @@ public class radixToMap {
         Double[][] returnArray = new Double[words.length][max_len];
 
         for (int j = 0; j< words.length; j++){
+            for (int k=0;k <max_len; k++){
+            returnArray[j][k] = 0.0d;
+        }
+    }
+        for (int j = 0; j< words.length; j++){
             for(int k=0;k<chunkSize && k*chunkSize<words[j].length();k++){
                 int startingpos = chunkSize * k;
                 int endingpos = chunkSize * (k+1) - 1 < words[j].length()? chunkSize * (k+1) - 1 : words[j].length() -1;
