@@ -4,9 +4,6 @@ import CantorMapping.*;
 import java.util.List;
 import java.util.Arrays;
 import java.time.Instant;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
 public class Executor {
     public static void main(String args[]){        
@@ -45,16 +42,6 @@ public class Executor {
 
         System.out.println(stopTime - startTime);
         System.out.println(stopTime2 - startTime2);
- 
-        /*
-        Result res = JUnitCore.runClasses(Tester.class);
-
-        for (Failure fail: res.getFailures()){
-            System.out.println(fail.toString());
-        }
-
-        System.out.println(res.wasSuccessful());
-        */
 
         //Part two - Suffix Sorting
         System.out.println("SUFFIX SORTING");
