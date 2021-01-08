@@ -9,6 +9,7 @@ package CantorMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MapConverter {
 
@@ -40,6 +41,12 @@ public class MapConverter {
         return returnArray;
     }
 
+    /**
+     * The default Cantor Mapping function
+     * 
+     * @param s - String object to be converted
+     * @return double - the converted numerical value
+     */
     public double CantorMap(String s) {        
         double result = 0.0d, temp, iterativePolynomial = 1.0d;
         for(char character: s.toCharArray())
@@ -47,6 +54,23 @@ public class MapConverter {
             temp = ((int)character - baseValue)*iterativePolynomial;
             iterativePolynomial/= x;
             result+=temp;
+        }
+        return result;
+    }
+
+    /**
+     * The custom order based Cantor Mapping function
+     * 
+     * @param s - String object to be converted
+     * @param lookupValue - Map for looking up custom order of given Character
+     * @return double - the converted numerical value
+     */
+    public double CantorMap(String s, Map<Character,Number> lookupValue){
+        double result = 0.0d, temp, iterativePolynomial = 1.0d;
+        for (char c : s.toCharArray()){
+            temp = (Double)lookupValue.get(c) * iterativePolynomial;            
+            iterativePolynomial/=x;
+            result += temp;
         }
         return result;
     }
