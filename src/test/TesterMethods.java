@@ -32,9 +32,21 @@ class TesterMethods {
         return all_strings.toArray();
     }
 
+    /**
+     * 
+     * @param index_size - the size of the array
+     * @return int[] - the randomized index based array
+     */
     public int[] createRandomizedIndexArray(int index_size){
         int[] randomizedIndex = new int[index_size];
-        //Math.random() -- check the documentation for bounded values
+        for (int i=index_size -1;i >=0; i-- ){
+            randomizedIndex[i] = i;
+        }
+        for (int i=index_size -1;i >=0; i-- ){
+            double f = Math.random()/Math.nextDown(1.0);            
+            int j = (int)((i)*f);            
+            int k = randomizedIndex[i];randomizedIndex[i] = randomizedIndex[j]; randomizedIndex[j] = k;
+        }
         return randomizedIndex;
     }
 } 
